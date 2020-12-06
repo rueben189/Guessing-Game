@@ -22,6 +22,7 @@ def runf(secret_word,closestguess,guess, guesses,c, a, hintc, end_condition,unde
     #while closestguess != secret_word:
     guesses.append(guess)
 
+
     if guess in secret_word:
         if guess == secret_word:
             closestguess = guess
@@ -105,12 +106,8 @@ def runf(secret_word,closestguess,guess, guesses,c, a, hintc, end_condition,unde
             clistchange.append('no')
 
 
-    elif guess == '':
-        hintc += 1
-        condition = 'fifth'
-        clistchange.append('no')
-
     clistend = False
+
     if clistchange[-1] == 'no':
         if len(clistchange) < 3:
             pass
