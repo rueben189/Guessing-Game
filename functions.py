@@ -6,7 +6,16 @@ def underscoref(secret_word, closestguess):
         underscores = underscores + ('_')
     return underscores
 
+def spacedf(secret_word, closestguess):
+    svar= ''
+    for num in range(0,len(closestguess)):
+        svar= svar + closestguess[num] + ' '
+    for num in range(0, len(secret_word) - len(closestguess)):
+        svar = svar + '_ '
+        #if num == len(closestguess):
+            #break
 
+    return svar
 def runf(secret_word,closestguess,guess, guesses,c, a, hintc, end_condition,underscores, clist,clistchange):
     global condition
 

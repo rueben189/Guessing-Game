@@ -1,8 +1,9 @@
 from tkinter import *
+import tkinter.font as font
 import math
 import random
 from Secret_Word_Dictionary import dictionary_name
-from functions import underscoref, runf
+from functions import underscoref, runf, spacedf
 
 root = Tk()
 root.title('Guessing Game')
@@ -32,9 +33,15 @@ def enterf(secret_word,closestguess,guesses, c, a, hintc, end_condition,undersco
     #print(hintc)
 
     global displayclosestguess
+    global svar
     global enterbutton
     global playagain
     global Label1
+    global displayfont
+
+    displayfont = font.Font(size=30)
+
+    svar = spacedf(secret_word, closestguess)
     if condition == 'first':
         c -= 1
         e.grid_forget()
@@ -50,7 +57,7 @@ def enterf(secret_word,closestguess,guesses, c, a, hintc, end_condition,undersco
     elif condition == 'second':
         e.delete(0,END)
         displayclosestguess.grid_forget()
-        displayclosestguess = Label(frame, text=closestguess + underscores)
+        displayclosestguess = Label(frame, text=svar, font=displayfont)
         displayclosestguess.grid(row=0, column=0)
         Label1.destroy()
         Label1 = Label(frame, text='You are on the right track')  # this guess becomes closest guess
@@ -63,7 +70,7 @@ def enterf(secret_word,closestguess,guesses, c, a, hintc, end_condition,undersco
     elif condition == 'third':
         e.delete(0, END)
         displayclosestguess.grid_forget()
-        displayclosestguess = Label(frame, text=closestguess + underscores)
+        displayclosestguess = Label(frame, text=svar, font=displayfont)
         displayclosestguess.grid(row=0, column=0)
         Label1.destroy()
         Label1 = Label(frame, text='You get another hint') #they get another hint because current guess in not better that closest guess
@@ -76,7 +83,7 @@ def enterf(secret_word,closestguess,guesses, c, a, hintc, end_condition,undersco
     elif condition == 'fourth':
         e.delete(0, END)
         displayclosestguess.grid_forget()
-        displayclosestguess = Label(frame, text=closestguess + underscores)
+        displayclosestguess = Label(frame, text=svar,font=displayfont)
         displayclosestguess.grid(row=0, column=0)
         Label1.destroy()
         Label1 = Label(frame, text='Not Quite. Try Again')
@@ -89,7 +96,7 @@ def enterf(secret_word,closestguess,guesses, c, a, hintc, end_condition,undersco
     elif condition == 'fifth':  # a guess wasn't entered in entry box
         e.delete(0, END)
         displayclosestguess.grid_forget()
-        displayclosestguess = Label(frame, text=closestguess + underscores)
+        displayclosestguess = Label(frame, text=svar,font=displayfont)
         displayclosestguess.grid(row=0, column=0)
         Label1.destroy()
         Label1 = Label(frame, text='You did not enter a guess')
@@ -131,20 +138,25 @@ def startf():
     end_condition = math.ceil(len(secret_word) / 3)
 
     global displayclosestguess
+    global svar
     global enterbutton
     global Label1
 
-    Label1 = Label(root, text='')
+
+    displayfont=   font.Font(size= 30)
+
+    svar = spacedf(secret_word, closestguess)
+    Label1 = Label(frame, text='')
 
     startbutton.grid_forget()
-    displayclosestguess = Label(frame, text=closestguess + underscores)
+    displayclosestguess = Label(frame, text=svar,font=displayfont)
     displayclosestguess.grid(row=0,column=0)
     e.grid(row=1, column=0, padx=10, pady=10)
     enterbutton = Button(frame, text='Enter', padx=40, pady=20,
                          command=lambda: enterf(secret_word, closestguess, guesses, c, a, hintc,
                                                 end_condition, underscores, clist, clistchange))
     enterbutton.grid(row=2, column=0)
-    return displayclosestguess, enterbutton, closestguess
+    return displayclosestguess, enterbutton, closestguess, svar
 
 start = 'start'
 
