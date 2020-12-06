@@ -12,7 +12,7 @@ frame= LabelFrame(root, padx = 5, pady = 5)
 
 frame.pack(padx =100, pady = 100)
 
-e = Entry(frame, width=35, borderwidth=3)
+e = Entry(frame, width=30, borderwidth=3)
 
 def playagainf():  #replay
     playagain.grid_forget()
@@ -38,6 +38,7 @@ def enterf(secret_word,closestguess,guesses, c, a, hintc, end_condition,undersco
     global Label1
     global displayfont
     global pos
+    global enterfont2
 
     displayfont = font.Font(size=30)
 
@@ -94,6 +95,7 @@ def enterf(secret_word,closestguess,guesses, c, a, hintc, end_condition,undersco
         else:
             Label1 = Label(frame, text='Not Quite. Try Again')
             Label1.grid(row=4, column=0)
+
         enterbutton.grid_forget()
         enterbutton = Button(frame, text='Enter', padx=40, pady=20,
                              command=lambda: enterf(secret_word, closestguess, guesses, c, a, hintc,
@@ -139,7 +141,9 @@ def startf():
     global Label1
     global pos
 
+
     displayfont=   font.Font(size= 30)
+    enterfont2= font.Font(size= 15)
 
     svar = spacedf(secret_word, closestguess)
     Label1 = Label(frame, text='')
@@ -147,7 +151,7 @@ def startf():
     startbutton.grid_forget()
     displayclosestguess = Label(frame, text=svar,font=displayfont)
     displayclosestguess.grid(row=0,column=0)
-    pos= Label(frame, text= dictionary_name[str(index)][1])
+    pos= Label(frame, text= dictionary_name[str(index)][1], font = enterfont2) #part of speech
     pos.grid(row=1,column=0)
     e.grid(row=2, column=0, padx=10, pady=10)
     enterbutton = Button(frame, text='Enter', padx=40, pady=20,
